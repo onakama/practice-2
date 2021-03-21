@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var theDate = Date()
+    var dateformate: DateFormatter{
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "ja_Jp")
+        df.dateStyle = .full
+        df.timeStyle = .short
+        return df
+    }
+    
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text(dateformate.string(from: theDate))
+            Divider()
+            DatePicker(selection: $theDate, label: { Text("日時") })
+                .pickerStyle(WheelPickerStyle())
+        }
+        .padding()
     }
 }
 
